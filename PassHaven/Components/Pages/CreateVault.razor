@@ -1,0 +1,46 @@
+﻿@page "/createvault"
+@using PassHaven.Models
+@inject VaultController controller
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+
+<h3>Vault</h3>
+
+<div class="container">
+    <div>
+        <label for="name">Vault Name: </label>
+        <input id="name" @bind="@Vault.Name" class="form-control" />
+    </div>
+    <div>
+        <label for="password">Password: </label>
+        <input id="password" @bind="@Vault.MasterPassword" class="form-control" type="password" />
+    </div>
+    <div>
+        <button class="btn btn-primary" @onclick="CreateVaultAsync">Create Vault</button>
+    </div>
+   
+</div>
+
+
+
+
+
+@code {
+    private Vault Vault { get; set; } = new Vault();
+
+
+    
+    public async Task CreateVaultAsync()
+    {
+        await controller.AddVaultAsync(Vault);
+        NavigationManager.NavigateTo("/passwordmanager");
+
+    }
+}
+
+<style>
+    .container {
+        display: flex;
+        flex-direction: column; /* Items will be stacked vertically */
+    }
+</style>
