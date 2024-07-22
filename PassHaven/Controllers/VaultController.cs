@@ -33,11 +33,6 @@ public class VaultController : ControllerBase
     [HttpPost("edit")]
     public async Task<IActionResult> EditVaultAsync(Vault vault)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-
         _context.Entry(vault).State = EntityState.Modified;
         await _context.SaveChangesAsync();
 

@@ -10,8 +10,8 @@ using PassHaven.Data;
 namespace PassHaven.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240716191426_thirddds")]
-    partial class thirddds
+    [Migration("20240717163306_four")]
+    partial class four
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,11 +19,15 @@ namespace PassHaven.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.7");
 
-            modelBuilder.Entity("PassHaven.Models.SocialMedia", b =>
+            modelBuilder.Entity("PassHaven.Models.PasswordEntry", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -40,7 +44,7 @@ namespace PassHaven.Migrations
 
                     b.HasIndex("VaultId");
 
-                    b.ToTable("SocialMedias");
+                    b.ToTable("PasswordEntries");
                 });
 
             modelBuilder.Entity("PassHaven.Models.Vault", b =>
@@ -62,10 +66,10 @@ namespace PassHaven.Migrations
                     b.ToTable("Vaults");
                 });
 
-            modelBuilder.Entity("PassHaven.Models.SocialMedia", b =>
+            modelBuilder.Entity("PassHaven.Models.PasswordEntry", b =>
                 {
                     b.HasOne("PassHaven.Models.Vault", "Vault")
-                        .WithMany("SocialMedias")
+                        .WithMany("PasswordEntries")
                         .HasForeignKey("VaultId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -75,7 +79,7 @@ namespace PassHaven.Migrations
 
             modelBuilder.Entity("PassHaven.Models.Vault", b =>
                 {
-                    b.Navigation("SocialMedias");
+                    b.Navigation("PasswordEntries");
                 });
 #pragma warning restore 612, 618
         }

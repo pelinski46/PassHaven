@@ -5,7 +5,7 @@
 namespace PassHaven.Migrations
 {
     /// <inheritdoc />
-    public partial class thirddd : Migration
+    public partial class four : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,20 +25,21 @@ namespace PassHaven.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SocialMedias",
+                name: "PasswordEntries",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     PlatformName = table.Column<string>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
                     PasswordHash = table.Column<string>(type: "TEXT", nullable: false),
                     VaultId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SocialMedias", x => x.Id);
+                    table.PrimaryKey("PK_PasswordEntries", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SocialMedias_Vaults_VaultId",
+                        name: "FK_PasswordEntries_Vaults_VaultId",
                         column: x => x.VaultId,
                         principalTable: "Vaults",
                         principalColumn: "Id",
@@ -46,8 +47,8 @@ namespace PassHaven.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_SocialMedias_VaultId",
-                table: "SocialMedias",
+                name: "IX_PasswordEntries_VaultId",
+                table: "PasswordEntries",
                 column: "VaultId");
         }
 
@@ -55,7 +56,7 @@ namespace PassHaven.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "SocialMedias");
+                name: "PasswordEntries");
 
             migrationBuilder.DropTable(
                 name: "Vaults");

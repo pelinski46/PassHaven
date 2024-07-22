@@ -5,7 +5,7 @@
 namespace PassHaven.Migrations
 {
     /// <inheritdoc />
-    public partial class thirdddss : Migration
+    public partial class CurrentMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
